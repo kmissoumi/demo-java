@@ -35,6 +35,8 @@ import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 
+// TODO: Add Session Creation Timer
+
 public class SampleSauceTest {
 
     public String sauce_username = System.getenv("SAUCE_USERNAME");
@@ -60,23 +62,16 @@ public class SampleSauceTest {
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][] {
-          new Object[]{"device",  "","","Android","Google.*"},
-          new Object[]{"device",  "Safari","","iOS","iPhone.*"},
-          new Object[]{"browser", "chrome","latest-1",        "Windows 10",""},
-          new Object[]{"browser", "firefox","latest",         "Windows 10",""},
-          new Object[]{"browser", "chrome","latest-1",        "macOS 11.00",""},
-          new Object[]{"browser", "safari","latest",          "macOS 10.15",""},
-          new Object[]{"browser", "firefox","55.0",           "Windows 7",""},
-          new Object[]{"browser", "MicrosoftEdge","latest",   "Windows 10",""},
-          new Object[]{"browser", "MicrosoftEdge","latest-1", "Windows 10",""},
-          new Object[]{"browser", "internet explorer","11",   "Windows 8.1",""},
-          new Object[]{"browser", "chrome","76.0",            "OS X 10.11",""},
-          new Object[]{"browser", "safari","11.0",            "macOS 10.12",""},
-          new Object[]{"browser", "chrome","latest",          "Windows 10",""},
-          new Object[]{"browser", "safari","latest",          "macOS 10.14",""},
-          new Object[]{"browser", "safari","latest",          "macOS 11.00",""},
-          new Object[]{"browser", "safari","latest",          "macOS 10.15",""},
-          new Object[]{"device",  "","","Android","Samsung.*"}
+          //new Object[]{"device",  "","","Android","Google.*"},
+          //new Object[]{"device",  "Safari","","iOS","iPhone.*"},
+          new Object[]{"device",  "","","Android","Samsung.*"},
+          new Object[]{"device",  "","","Android","Samsung Galaxy S7"},
+          new Object[]{"device",  "","","Android","Samsung Galaxy S7"},
+          new Object[]{"device",  "","","Android","Samsung Galaxy S7"},
+          new Object[]{"device",  "","","Android","Samsung Galaxy S7"},
+          new Object[]{"device",  "","","Android","Samsung Galaxy S7"}
+
+
 
         };
     }
@@ -128,6 +123,7 @@ public class SampleSauceTest {
           capabilities.setCapability("deviceName", device);
           capabilities.setCapability("idleTimeout", "90");
           capabilities.setCapability("newCommandTimeout", "90");
+          capabilities.setCapability("appiumVersion", "1.17.1");
         }
         else if (environment == "emusim" ) {
           capabilities.setCapability("deviceOrientation", "portrait");
@@ -141,7 +137,7 @@ public class SampleSauceTest {
         ObjectMapper mapper = new ObjectMapper();
         try {
           String jsonString = mapper.writeValueAsString(capabilities);
-          //System.out.println(jsonString);
+            System.out.println(jsonString);
           }
           catch (Exception e) {
             e.printStackTrace();
@@ -181,7 +177,7 @@ public class SampleSauceTest {
     @AfterMethod
     public void tearDown(ITestResult result) throws Exception {
     	boolean status = result.isSuccess();
-    	((JavascriptExecutor)webDriver.get()).executeScript("sauce:job-result="+ status);
+    	//((JavascriptExecutor)webDriver.get()).executeScript("sauce:job-result="+ status);
         webDriver.get().quit();
     }
 
@@ -204,47 +200,10 @@ public class SampleSauceTest {
         isErrorPresent(driver);
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void demoPageTitle(String type, String browser, String version, String os, String device, Method method) throws Exception {
 
-        WebDriver driver = createDriver(type, browser, version, os, device, method.getName());
-        driver.get("https://www.saucedemo.com");
-        assertEquals(driver.getTitle(), "Swag Labs");
-    }
 
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void validLoginFlow(String type, String browser, String version, String os, String device, Method method) throws Exception {
 
-        WebDriver driver = createDriver(type, browser, version, os, device, method.getName());
-        login(driver, "standard_user", "secret_sauce");
-        assert(driver.findElement(By.id("inventory_container")).isDisplayed());
-    }
 
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void problemLoginFlow(String type, String browser, String version, String os, String device, Method method) throws Exception {
-
-        WebDriver driver = createDriver(type, browser, version, os, device, method.getName());
-        login(driver, "problem_user", "secret_sauce");
-        try {
-          // findElement will raise an exception when element is not found.
-          // If element is found, set our assertion to false.
-          driver.findElement(By.id("inventory_container")).isDisplayed();
-          ((JavascriptExecutor)driver).executeScript("sauce:context=// Missing Element Expected. Test is NOTOK. 🙀⛔️💀❌");
-          assert(false);
-        }
-        catch(Exception e) {
-          ((JavascriptExecutor)driver).executeScript("sauce:context=// Missing Element Expected. Test is OK! 🎉🏆⭐️✅");
-          assert(true);
-        }
-    }
-
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void lockedOutLoginFlow(String type, String browser, String version, String os, String device, Method method) throws Exception {
-
-        WebDriver driver = createDriver(type, browser, version, os, device, method.getName());
-        login(driver, "locked_out_user", "secret_sauce");
-        isErrorPresent(driver);
-    }
 
     /**
      * @return the {@link WebDriver} for the current thread
@@ -264,21 +223,21 @@ public class SampleSauceTest {
 
     public void login(WebDriver driver, String username, String password) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        ((JavascriptExecutor)driver).executeScript("sauce:context=// Navigate to the Sauce Labs Login Page");
+        //((JavascriptExecutor)driver).executeScript("sauce:context=// Navigate to the Sauce Labs Login Page");
         driver.get("https://www.saucedemo.com");
-        ((JavascriptExecutor)driver).executeScript("sauce:context=// Enter Username");
+        //((JavascriptExecutor)driver).executeScript("sauce:context=// Enter Username");
         WebElement usernameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("user-name")));
         usernameInput.sendKeys(username);
-        ((JavascriptExecutor)driver).executeScript("sauce:context=// Enter Password");
+        //((JavascriptExecutor)driver).executeScript("sauce:context=// Enter Password");
         driver.findElement(By.id("password")).sendKeys(password);
-        ((JavascriptExecutor)driver).executeScript("sauce:context=// Click Submit Button");
+        //((JavascriptExecutor)driver).executeScript("sauce:context=// Click Submit Button");
         driver.findElement(By.cssSelector("#login_button_container > div > form > input.btn_action")).click();
 
     }
 
     public void isErrorPresent(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        ((JavascriptExecutor)driver).executeScript("sauce:context=// Check if Error is Present");
+        //((JavascriptExecutor)driver).executeScript("sauce:context=// Check if Error is Present");
         String errorSelector = "#login_button_container > div > form > h3";
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(errorSelector)));
         assert(errorMessage.isDisplayed());
