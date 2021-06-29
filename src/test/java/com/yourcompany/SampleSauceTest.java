@@ -62,14 +62,10 @@ public class SampleSauceTest {
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][] {
-          //new Object[]{"device",  "","","Android","Google.*"},
-          //new Object[]{"device",  "Safari","","iOS","iPhone.*"},
-          new Object[]{"device",  "","","Android","Samsung.*"},
-          new Object[]{"device",  "","","Android","Samsung Galaxy S7"},
-          new Object[]{"device",  "","","Android","Samsung Galaxy S7"},
-          new Object[]{"device",  "","","Android","Samsung Galaxy S7"},
-          new Object[]{"device",  "","","Android","Samsung Galaxy S7"},
-          new Object[]{"device",  "","","Android","Samsung Galaxy S7"}
+          new Object[]{"device",  "","","Android","Google.*"},
+          new Object[]{"device",  "Safari","","iOS","iPhone.*"},
+          new Object[]{"device",  "","","Android","Google.*"},
+          new Object[]{"device",  "Safari","","iOS","iPhone.*"}
 
 
 
