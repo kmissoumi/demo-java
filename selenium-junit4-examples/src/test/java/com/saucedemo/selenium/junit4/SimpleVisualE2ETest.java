@@ -56,7 +56,7 @@ public class SimpleVisualE2ETest {
         assertNull(response.get("message"));
     }
 
-    @Ignore("Expected to Fail - For Demo Purposes")
+  //  @Ignore("Expected to Fail - For Demo Purposes")
     @Test
     public void visualBaselineBranching() throws MalformedURLException {
         //*

@@ -41,14 +41,15 @@ public class IOSNativeAppTest {
         capabilities.setCapability("newCommandTimeout", "90");
         capabilities.setCapability("language", "en");
         capabilities.setCapability("platformName", "iOS");
+        capabilities.setCapability("recordDeviceVitals", true);
         //Not specifying platformVersion or the exact device is the most likely to
         //find a device in the cloud
         //Find all iPhone devices that aren't 5 or 5S: ^(iPhone.*)(?!5|5S)$
-        capabilities.setCapability("deviceName", "^(iPhone.*)(?!5|5S)$");
+        capabilities.setCapability("deviceName", "iPhone SE");
         capabilities.setCapability("name", name.getMethodName());
 
         capabilities.setCapability("app",
-                "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+                "https://github.com/iflanagan/appiumios/raw/master/Calculator.ipa");
 
         driver = new IOSDriver(
                 new URL("https://" + System.getenv("SAUCE_USERNAME") + ":" +
@@ -62,7 +63,5 @@ public class IOSNativeAppTest {
     @Test
     public void shouldOpenApp() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 10000);
-        WebElement loginField = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("test-Username")));
-        assertTrue(loginField.isDisplayed());
     }
 }
