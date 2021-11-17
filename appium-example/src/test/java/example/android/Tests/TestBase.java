@@ -61,8 +61,7 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"Android", "Samsung Galaxy Tab S3 GoogleAPI Emulator", "8.1", "1.9.1", "portrait"},
-                new Object[]{"Android", "Samsung Galaxy S9 Plus FHD GoogleAPI Emulator", "8.1", "1.9.1", "portrait"}
+                new Object[]{"Android", "Android GoogleAPI Emulator", "11", "", "portrait"}
         };
     }
 
