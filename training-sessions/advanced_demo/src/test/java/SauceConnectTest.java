@@ -18,8 +18,8 @@ public class SauceConnectTest {
             System.setProperty("SAUCE_ACCESS_KEY", System.getenv("SAUCE_KEY_DEMO"));
 
             SauceOptions sauceOptions = new SauceOptions();
-            sauceOptions.setTunnelIdentifier("ORANGE");
-            sauceOptions.setParentTunnel("titusfortner");
+            sauceOptions.setTunnelIdentifier("demoJavaTunnel");
+            sauceOptions.setParentTunnel("grogu");
 
             this.setSauceOptions(sauceOptions);
             super.starting(description);

@@ -36,7 +36,7 @@ public class SauceBindingsTest {
 
     @Test
     public void correctTitle() {
-        driver.navigate().to("https://www.saucedemo.com");
+        driver.navigate().to("http://localhost:3000");
         assertEquals("Swag Labs", driver.getTitle());
     }
 

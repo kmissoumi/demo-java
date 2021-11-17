@@ -48,13 +48,13 @@ public class ChromeExtensionTest {
         browserOptions.addExtensions(ext);
 
         browserOptions.setCapability("sauce:options", sauceOptions);
-        URL url = new URL("https://ondemand.eu-central-1.saucelabs.com/wd/hub");
+        URL url = new URL("https://ondemand.us-west-1.saucelabs.com/wd/hub");
         driver = new RemoteWebDriver(url, browserOptions);
     }
 
     @Test
     public void chromeExtensionAddNinjaSaucebotImg() {
-        driver.navigate().to("https://www.saucedemo.com");
+        driver.navigate().to("http://localhost:3000");
 
         // Verification
         Assert.assertTrue(isNinjaSaucebotExist());
