@@ -62,10 +62,10 @@ public class SampleSauceTest {
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][] {
-          new Object[]{"device",  "","","Android","Google.*"},
-          new Object[]{"device",  "Safari","","iOS","iPhone.*"},
-          new Object[]{"device",  "","","Android","Google.*"},
-          new Object[]{"device",  "Safari","","iOS","iPhone.*"}
+          //new Object[]{"device",  "Safari","","iOS","iPhone.*"};
+          //new Object[]{"emusim",  "", "8.1", "Android", "Samsung Galaxy S9 Plus FHD GoogleAPI Emulator"};
+          new Object[]{"emusim",  "", "11", "Android", "Android GoogleAPI Emulator"}
+
 
 
 
@@ -119,15 +119,29 @@ public class SampleSauceTest {
           capabilities.setCapability("deviceName", device);
           capabilities.setCapability("idleTimeout", "90");
           capabilities.setCapability("newCommandTimeout", "90");
-          capabilities.setCapability("appiumVersion", "1.17.1");
+          //capabilities.setCapability("appiumVersion", "1.17.1");
+          //capabilities.setCapability("privateDevicesOnly", true);
+          //capabilities.setCapability("cacheId", "12341235asfmaspfoijpi12kn109");
         }
         else if (environment == "emusim" ) {
+
+          //DesiredCapabilities caps = DesiredCapabilities.android();
+          //capabilities.setCapability("appiumVersion", "1.20.2");
           capabilities.setCapability("deviceOrientation", "portrait");
-          capabilities.setCapability("browserName", browser);
-          capabilities.setCapability("platformName", os);
-          capabilities.setCapability("deviceName", device);
-          capabilities.setCapability("extendedDebugging", true);
-          capabilities.setCapability("capturePerformance", true);
+          capabilities.setCapability("browserName", "");
+          capabilities.setCapability("platformVersion", "11");
+          capabilities.setCapability("platformName", "Android");
+          capabilities.setCapability("idleTimeout", "90");
+          capabilities.setCapability("newCommandTimeout", "90");
+          capabilities.setCapability("app", "https://github.com/saucelabs/sample-app-mobile/releases/download/2.2.0/Android.SauceLabs.Mobile.Sample.app.2.2.0.apk");
+
+
+          //capabilities.setCapability("app", "https://github.com/saucelabs/sample-app-mobile/releases/download/2.2.0/Android.SauceLabs.Mobile.Sample.app.2.2.0.apk");
+
+
+
+
+
         }
 
         ObjectMapper mapper = new ObjectMapper();
