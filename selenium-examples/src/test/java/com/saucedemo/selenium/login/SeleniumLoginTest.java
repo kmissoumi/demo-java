@@ -19,6 +19,18 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.IOException;
+
+import org.apache.hc.client5.http.ClientProtocolException;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 /**
  * Login tests with Selenium.
@@ -49,6 +61,39 @@ public class SeleniumLoginTest {
     @DisplayName("Swag Labs Login with Selenium")
     @Test
     public void swagLabsLoginTest() {
+        // Retreive credentials from Sauce API
+        try {
+          final CloseableHttpClient httpclient = HttpClients.createDefault();
+          final HttpGet httpget = new HttpGet("https://api.us-west-1.saucelabs.com/rest/v1/public/tunnels/info/versions");
+          System.out.println("----------------------------------------");
+          System.out.println("Executing request " + httpget.getMethod() + " " + httpget.getUri());
+          final HttpClientResponseHandler<String> responseHandler = new HttpClientResponseHandler<String>() {
+              @Override
+              public String handleResponse(
+                      final ClassicHttpResponse response) throws IOException {
+                  final int status = response.getCode();
+                  if (status >= HttpStatus.SC_SUCCESS && status < HttpStatus.SC_REDIRECTION) {
+                      final HttpEntity entity = response.getEntity();
+                      try {
+                          return entity != null ? EntityUtils.toString(entity) : null;
+                      } catch (final ParseException ex) {
+                          throw new ClientProtocolException(ex);
+                      }
+                  } else {
+                      throw new ClientProtocolException("Unexpected response status: " + status);
+                  }
+              }
+          };
+          final String responseBody = httpclient.execute(httpget, responseHandler);
+          System.out.println("----------------------------------------");
+          System.out.println(responseBody);
+          System.out.println("----------------------------------------");
+        } catch (Exception e) {
+            System.out.println("API DANGER");
+            e.printStackTrace();
+            System.exit(1);
+        }
+
         driver.get("https://www.saucedemo.com");
 
         By usernameFieldLocator = By.cssSelector("#user-name");
