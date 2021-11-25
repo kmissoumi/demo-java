@@ -32,6 +32,8 @@ import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Login tests with Selenium.
  */
@@ -62,6 +64,7 @@ public class SeleniumLoginTest {
     @Test
     public void swagLabsLoginTest() {
         // Retreive credentials from Sauce API
+        String response = new String();
         try {
           final CloseableHttpClient httpclient = HttpClients.createDefault();
           final HttpGet httpget = new HttpGet("https://api.us-west-1.saucelabs.com/rest/v1/public/tunnels/info/versions");
@@ -85,6 +88,7 @@ public class SeleniumLoginTest {
               }
           };
           final String responseBody = httpclient.execute(httpget, responseHandler);
+          response = responseBody;
           System.out.println("----------------------------------------");
           System.out.println(responseBody);
           System.out.println("----------------------------------------");
@@ -93,6 +97,25 @@ public class SeleniumLoginTest {
             e.printStackTrace();
             System.exit(1);
         }
+
+
+        // Response to JAVA Object
+        String userName = new String();
+        String password = new String();
+        try {
+        Map<String,String> responseMap = new HashMap<String, String>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        responseMap = objectMapper.readValue(response, HashMap.class);
+        System.out.println(responseMap);
+        System.out.println("----------------------------------------");
+        userName = (String) responseMap.get("latest_version");
+        password = (String) responseMap.get("latest_version");
+        } catch (Exception e) {
+          e.printStackTrace();
+          System.exit(1);
+          }
+        System.out.println("userName:" + userName);
+        System.out.println("----------------------------------------");
 
         driver.get("https://www.saucedemo.com");
 
@@ -107,8 +130,8 @@ public class SeleniumLoginTest {
         WebElement passwordField = driver.findElement(passwordFieldLocator);
         WebElement submitButton = driver.findElement(submitButtonLocator);
 
-        userNameField.sendKeys("standard_user");
-        passwordField.sendKeys("secret_sauce");
+        userNameField.sendKeys(userName);
+        passwordField.sendKeys(password);
         submitButton.click();
 
         Assertions.assertEquals("https://www.saucedemo.com/inventory.html", driver.getCurrentUrl());
@@ -129,7 +152,7 @@ public class SeleniumLoginTest {
         }
 
         private void endSession(boolean passed) {
-            String result = passed ? "passed" : "failed"; 
+            String result = passed ? "passed" : "failed";
             driver.executeScript("sauce:job-result=" + result);
 
             driver.quit();

@@ -17,6 +17,7 @@
         <sauce_testng.version>1.0.0</sauce_testng.version>
         <appium.version>7.3.0</appium.version>
         <maven.surefire.version>3.0.0-M5</maven.surefire.version>
+        <jackson.version>2.12.4</jackson.version>
         <httpcore.version>5.1.2</httpcore.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -41,6 +42,11 @@
             <artifactId>java-client</artifactId>
             <version>${appium.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
     <build>
