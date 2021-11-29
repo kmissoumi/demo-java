@@ -1,6 +1,13 @@
 package com.saucedemo.selenium.login;
 
 import org.junit.jupiter.api.Assertions;
+// import org.apache.http.client.ClientProtocolException;
+//import com.fasterxml.jackson.core.type.TypeReference;
+//import com.fasterxml.jackson.databind.DeserializationFeature;
+//import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,29 +17,41 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+//import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+//import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
+//import java.util.List;
 import java.util.Map;
-import java.io.IOException;
+import java.util.Base64;
 
-import org.apache.hc.client5.http.ClientProtocolException;
-import org.apache.hc.client5.http.classic.methods.HttpGet;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.core5.http.ClassicHttpResponse;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.HttpStatus;
-import org.apache.hc.core5.http.ParseException;
-import org.apache.hc.core5.http.io.HttpClientResponseHandler;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.utils.URIBuilder;
+// import org.apache.http.client.methods.CloseableHttpResponse;
+// import org.apache.http.client.methods.HttpGet;
+// import org.apache.http.client.CredentialsProvider;
+// import org.apache.http.auth.AuthScope;
+// import org.apache.http.auth.UsernamePasswordCredentials;
+// import org.apache.http.impl.client.BasicCredentialsProvider;
+// import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 
 /**
  * Login tests with Selenium.
@@ -62,63 +81,64 @@ public class SeleniumLoginTest {
 
     @DisplayName("Swag Labs Login with Selenium")
     @Test
-    public void swagLabsLoginTest() {
-        // Retreive credentials from Sauce API
-        String response = new String();
-        try {
-          final CloseableHttpClient httpclient = HttpClients.createDefault();
-          final HttpGet httpget = new HttpGet("https://api.us-west-1.saucelabs.com/rest/v1/public/tunnels/info/versions");
-          System.out.println("----------------------------------------");
-          System.out.println("Executing request " + httpget.getMethod() + " " + httpget.getUri());
-          final HttpClientResponseHandler<String> responseHandler = new HttpClientResponseHandler<String>() {
-              @Override
-              public String handleResponse(
-                      final ClassicHttpResponse response) throws IOException {
-                  final int status = response.getCode();
-                  if (status >= HttpStatus.SC_SUCCESS && status < HttpStatus.SC_REDIRECTION) {
-                      final HttpEntity entity = response.getEntity();
-                      try {
-                          return entity != null ? EntityUtils.toString(entity) : null;
-                      } catch (final ParseException ex) {
-                          throw new ClientProtocolException(ex);
-                      }
-                  } else {
-                      throw new ClientProtocolException("Unexpected response status: " + status);
-                  }
-              }
-          };
-          final String responseBody = httpclient.execute(httpget, responseHandler);
-          response = responseBody;
-          System.out.println("----------------------------------------");
-          System.out.println(responseBody);
-          System.out.println("----------------------------------------");
-        } catch (Exception e) {
-            System.out.println("API DANGER");
-            e.printStackTrace();
-            System.exit(1);
-        }
+    public void swagLabsLoginTest() throws Exception {
+        // Retrieve credentials from Sauce API
+        String response;
+        String sauceUserName = System.getenv("SAUCE_USERNAME");
+        String sauceAccessKey = System.getenv("SAUCE_ACCESS_KEY");
+        String hookId = System.getenv().getOrDefault("hookId", "83485139-58df-4a13-8e4b-4cd96e64117f");
+        String testId = System.getenv().getOrDefault("testId", "619ee0855d058a1953bdd21b");
+        String projectId = System.getenv().getOrDefault("testId", "618f37f15d606a1fe7cbab3f");
 
+        String runPath = "api-testing/rest/v4/" + hookId + "/tests/" + testId + "/_run-sync";
 
-        // Response to JAVA Object
-        String userName = new String();
-        String password = new String();
-        try {
-        Map<String,String> responseMap = new HashMap<String, String>();
-        ObjectMapper objectMapper = new ObjectMapper();
-        responseMap = objectMapper.readValue(response, HashMap.class);
-        System.out.println(responseMap);
+        URI uri = new URIBuilder()
+                .setScheme("https")
+                .setHost("api.us-west-1.saucelabs.com")
+                .setPort(443)
+                .setPath(runPath)
+                .setParameter("format", "json")
+                .build();
+        String encoding = Base64.getEncoder().encodeToString((sauceUserName + ":" + sauceAccessKey).getBytes());
+        //System.out.println("----------------------------------------");
+        //System.out.println(encoding);
+        HttpPost httpPost = new HttpPost(uri);
+        httpPost.setHeader(HttpHeaders.AUTHORIZATION, "Basic " + encoding);
+        HttpClient httpClient = HttpClientBuilder.create().build();
         System.out.println("----------------------------------------");
-        userName = (String) responseMap.get("latest_version");
-        password = (String) responseMap.get("latest_version");
-        } catch (Exception e) {
-          e.printStackTrace();
-          System.exit(1);
-          }
-        System.out.println("userName:" + userName);
+        System.out.println("Executing request " + httpPost.getMethod() + ":");
+        System.out.println(httpPost.getURI());
         System.out.println("----------------------------------------");
+        HttpResponse r = httpClient.execute(httpPost);
+        StatusLine s = r.getStatusLine();
+        System.out.printf("HTTP Response: %d, %s\n", s.getStatusCode(), s.getReasonPhrase());
+        System.out.println("----------------------------------------");
+        HttpEntity w = r.getEntity();
+        response = EntityUtils.toString(w);
+        System.out.println(response);
+        System.out.println("----------------------------------------");
+        JsonArray j = (JsonArray) new JsonParser().parse(response);
+        JsonObject item = (JsonObject) j.get(0);
+        String eventId = item.get("id").getAsString();
+        JsonObject facts = item.getAsJsonObject("facts");
+        System.out.printf("API eventId=%s \n", eventId);
+        System.out.printf("API facts=%s \n", facts.toString());
+        System.out.println("----------------------------------------");
+        String userName = facts.getAsJsonObject("userName").get("value").getAsString();
+        String password = facts.getAsJsonObject("password").get("value").getAsString();
+        System.out.printf("userName=%s \n", userName);
+        System.out.printf("password=%s \n", password);
+        System.out.println("----------------------------------------");
+        String reportURL = "project/" + projectId + "/event/" + eventId;
+        System.out.println("API  Report URL: https://api.us-west-1.saucelabs.com:443/api-testing/" + reportURL);
 
         driver.get("https://www.saucedemo.com");
+        ((JavascriptExecutor) driver).executeScript("sauce:context=Sauce API URL: https://api.us-west-1.saucelabs.com:443/api-testing/");
+        ((JavascriptExecutor) driver).executeScript("sauce:context=" + reportURL);
 
+        String job_id = driver.getSessionId().toString();
+        System.out.println("Test Report URL: https://www.saucelabs.com/tests/" + job_id);
+        System.out.println("----------------------------------------");
         By usernameFieldLocator = By.cssSelector("#user-name");
         By passwordFieldLocator = By.cssSelector("#password");
         By submitButtonLocator = By.cssSelector(".btn_action");
