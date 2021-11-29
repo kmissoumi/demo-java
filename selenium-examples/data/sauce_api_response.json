@@ -1,0 +1,111 @@
+[
+    {
+        "id": "619ee36aea2f73181369412c",
+        "events": [
+            {
+                "date": 1637802858968,
+                "events": [
+                    {
+                        "date": 1637802858969,
+                        "events": [
+                            {
+                                "date": 1637802858969,
+                                "events": [
+                                    {
+                                        "action": "get",
+                                        "expression": "https://m3-vault.load2.apifortress.com/user",
+                                        "footprint": "m3-vault.load2.apifortress.com/user",
+                                        "metrics": {
+                                            "fetch": 1,
+                                            "latency": 39,
+                                            "overall": 60
+                                        },
+                                        "requestDetails": "GET https://m3-vault.load2.apifortress.com/user\n\nGET /user HTTP/1.1\nhost: m3-vault.load2.apifortress.com\nUser-Agent: SauceLabs/API-Fortress - WSTestJS\naccept-encoding: gzip, deflate\n\n",
+                                        "status": 200,
+                                        "success": true
+                                    },
+                                    {
+                                        "action": "assert-equals",
+                                        "expression": "payload_response.headers['Content-Type']==application/json;charset=utf-8",
+                                        "success": true
+                                    },
+                                    {
+                                        "action": "assert-exists",
+                                        "expression": "payload",
+                                        "success": true
+                                    },
+                                    {
+                                        "action": "assert-exists",
+                                        "expression": "payload.username",
+                                        "success": true
+                                    },
+                                    {
+                                        "action": "assert-exists",
+                                        "expression": "payload.password",
+                                        "success": true
+                                    },
+                                    {
+                                        "action": "fact",
+                                        "expression": "fact(userName)",
+                                        "success": true
+                                    },
+                                    {
+                                        "action": "fact",
+                                        "expression": "fact(password)",
+                                        "success": true
+                                    }
+                                ],
+                                "kind": "sequence"
+                            }
+                        ],
+                        "kind": "inputSet",
+                        "name": "default"
+                    }
+                ],
+                "inputBatteryName": "default",
+                "kind": "inputBattery"
+            }
+        ],
+        "tags": [],
+        "criticalFailures": [],
+        "httpFailures": [],
+        "facts": {
+            "password": {
+                "label": "password",
+                "value": "secret_sauce"
+            },
+            "userName": {
+                "label": "userName",
+                "value": "standard_user"
+            }
+        },
+        "date": 1637802858968,
+        "test": {
+            "name": "get_login_name",
+            "id": "619ee0855d058a1953bdd21b"
+        },
+        "failuresCount": 0,
+        "warningsCount": 0,
+        "compressed": false,
+        "run": {
+            "name": "",
+            "id": ""
+        },
+        "company": {
+            "name": "",
+            "id": "c3a220495928436a8bd31b486980bae4"
+        },
+        "project": {
+            "name": "sauce api",
+            "id": "618f37f15d606a1fe7cbab3f"
+        },
+        "contextId": "2aa3ee0f-0cf1-4dcc-950a-92bd916cb3d0",
+        "temp": false,
+        "expireAt": null,
+        "executionTimeSeconds": 1,
+        "taskId": "ffe7b214-2b97-463f-97ea-c68aabc853e5",
+        "mode": "ondemand",
+        "buildId": "",
+        "exception": ""
+    }
+]
