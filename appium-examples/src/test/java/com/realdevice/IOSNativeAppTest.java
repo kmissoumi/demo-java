@@ -40,13 +40,8 @@ public class IOSNativeAppTest {
         capabilities.setCapability("noReset", "true");
         capabilities.setCapability("newCommandTimeout", "90");
         capabilities.setCapability("language", "en");
-        capabilities.setCapability("platformName", "iOS");
-        //Not specifying platformVersion or the exact device is the most likely to
-        //find a device in the cloud
-        //Find all iPhone devices that aren't 5 or 5S: ^(iPhone.*)(?!5|5S)$
-        capabilities.setCapability("deviceName", "^(iPhone.*)(?!5|5S)$");
+        capabilities.setCapability("deviceName", "iPhone.*");
         capabilities.setCapability("name", name.getMethodName());
-
         capabilities.setCapability("app",
                 "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
 

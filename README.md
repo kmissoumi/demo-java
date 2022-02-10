@@ -1,162 +1,251 @@
-# Java Demonstration Scripts
-
-Welcome to Java Demo Scripts designed by Solution Architects to provide examples of how to use Sauce Labs technologies. This repository contains
-everything that you need to get started with web, mobile, visual, functional and all other types of automation using Java.
-
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/564ddfb012db40048781b7b6c954d099)](https://app.codacy.com/gh/saucelabs-training/demo-java?utm_source=github.com&utm_medium=referral&utm_content=saucelabs-training/demo-java&utm_campaign=Badge_Grade_Dashboard)
-[![Best Practices Tests](https://github.com/saucelabs-training/demo-java/actions/workflows/best-practice.yml/badge.svg)](https://github.com/saucelabs-training/demo-java/actions/workflows/best-practice.yml)
-[![Selenium JUnit 5 Tests](https://github.com/saucelabs-training/demo-java/actions/workflows/selenium-examples.yml/badge.svg)](https://github.com/saucelabs-training/demo-java/actions/workflows/selenium-examples.yml)
-[![JUnit 4 Tests](https://github.com/saucelabs-training/demo-java/actions/workflows/junit4.yml/badge.svg)](https://github.com/saucelabs-training/demo-java/actions/workflows/junit4.yml)
-[![TestNg Tests](https://github.com/saucelabs-training/demo-java/actions/workflows/testng.yml/badge.svg)](https://github.com/saucelabs-training/demo-java/actions/workflows/testng.yml)
-[![Selenium Cucumber Examples](https://github.com/saucelabs-training/demo-java/actions/workflows/cucumber.yml/badge.svg)](https://github.com/saucelabs-training/demo-java/actions/workflows/cucumber.yml)
-[![Real Devices](https://github.com/saucelabs-training/demo-java/actions/workflows/real-devices.yml/badge.svg)](https://github.com/saucelabs-training/demo-java/actions/workflows/real-devices.yml)
-
-## 🥇Most Popular
-*  [Web automation best practices framework with multiple testing strategies. Crafted by industry experts with decades of experience.](./best-practice/)
-*  [Quick start test, Junit 5](./selenium-examples/src/test/java/com/saucedemo/selenium/demo/SeleniumTest.java)
-*  [Quick start test, Junit 4](./selenium-junit4-examples/src/test/java/com/saucedemo/selenium/junit4/demo/SeleniumTest.java)
-*  [Quick start test, TestNg](./selenium-testng-examples/src/test/java/com/saucedemo/selenium/testng/demo/SeleniumTest.java)
-*  [iOS real device, native app, Junit4](./appium-examples/src/test/java/com/realdevice/IOSNativeAppTest.java)
-*  [Front-end performance testing](./selenium-examples/src/test/java/com/saucedemo/selenium/PerformanceTest.java)
-*  [Visual E2E test](./selenium-junit4-examples/src/test/java/com/saucedemo/selenium/junit4/SimpleVisualE2ETest.java)
-*  [Sauce Connect usage](./selenium-junit4-examples/src/test/java/com/saucedemo/selenium/junit4/SauceConnectTest.java)
-
-## Best Practices
-*  [Desktop](./best-practice/src/test/java/com/saucedemo/tests/DesktopTests.java) `junit4` `sauce-bindings`
-*  [Emu/Sim Web](./best-practice/src/test/java/com/saucedemo/tests/EmuSimWebAppTests.java) `junit4` `sauce-bindings`
-*  [Performance](./best-practice/src/test/java/com/saucedemo/tests/PerformanceTests.java) `junit4` `sauce-bindings`
-*  [RealDevice](./best-practice/src/test/java/com/saucedemo/tests/RealDeviceWebTests.java) `junit4` `sauce-bindings`
-*  [Visual E2E](./best-practice/src/test/java/com/saucedemo/tests/VisualCrossPlatformTests.java) `junit4` `sauce-bindings`
-
-## 🖥Web automation
-
-- Sauce Bindings With TestRunner Examples
-  * [Junit 5](./selenium-examples/src/test/java/com/saucedemo/selenium/demo/SaucebindingsJunitTest.java) `junit5` `sauce-bindings`
-  * [Junit 4](./selenium-junit4-examples/src/test/java/com/saucedemo/selenium/junit4/demo/SauceBindingsJunit4Test.java) `junit4` `sauce-bindings`
-  * [TestNg](./selenium-testng-examples/src/test/java/com/saucedemo/selenium/testng/demo/SauceBindingsTestngTest.java) `testng` `sauce-bindings`
-
-- Sauce Bindings Examples
-  * [Junit 5](./selenium-examples/src/test/java/com/saucedemo/selenium/demo/SauceBindingsTest.java) `junit4` `sauce-bindings`
-  * [Junit 4](./selenium-junit4-examples/src/test/java/com/saucedemo/selenium/junit4/demo/SauceBindingsTest.java) `junit4` `sauce-bindings`
-  * [TestNg](./selenium-testng-examples/src/test/java/com/saucedemo/selenium/testng/demo/SauceBindingsTest.java) `junit4` `sauce-bindings`
-
-- Selenium Examples
-  * [Accessibility Test with Sauce Bindings](/selenium-examples/src/test/java/com/saucedemo/selenium/accessibility/SauceBindingsTest.java) `junit4` `sauce-bindings`
-  * [Accessibility Test with Deque Axe](/selenium-examples/src/test/java/com/saucedemo/selenium/accessibility/DequeAxeTest.java) `junit4`
-  * [Cucumber web test](./selenium-cucumber-examples/src/test/java/com/saucedemo/selenium/cucumber/RunTestsAT.java)
-  * [Windows authentication](./selenium-junit4-examples/src/test/java/com/saucedemo/selenium/junit4/WindowsAuthentication.java) `junit4`
-  * [Cross Browser/Platform in Parallel w/ TestNG](./selenium-testng-examples/src/test/java/com/saucedemo/selenium/testng/CrossBrowserPlatformTest.java) `testng`
-  * [Single Browser in Parallel w/ TestNG](./selenium-testng-examples/src/test/java/com/saucedemo/selenium/testng/ParallelSingleBrowserTest.java) `testng`
-
-## 📱Mobile automation
-
-[📚 Mobile Testing Training Tutorials](./TRAINING.md)
-
-- Real Devices
-  * [iOS native app](./appium-examples/src/test/java/com/realdevice/IOSNativeAppTest.java)
-  * [Android native app](./appium-examples/src/test/java/com/realdevice/AndroidNativeAppTest.java)
-  * [Upload app to Sauce Storage](./appium-examples/src/test/java/com/realdevice/SauceStorage.sh)
-  * [Image Injection](./appium-examples/src/test/java/com/realdevice/image_injection)
-
-- Emulators and Simulators
-  * [iOS native app](./appium-examples/src/test/java/com/emusim/IOSNativeAppExample.java)
-  * [iOS web app](./appium-examples/src/test/java/com/emusim/IOSWebAppExample.java)
-  * [Biometric Login](./appium-examples/src/test/java/com/emusim/biometric_login)
-
-## ⚙️Setup
-
-*  Install [Git](https://github.com/saucelabs-training/demo-java/blob/main/docs/prerequisites.md#install-git)
-*  Install [IntelliJ (or another IDE)](https://github.com/saucelabs-training/demo-java/blob/main/docs/prerequisites.md#install-intellij)
-*  Install [JDK](https://github.com/saucelabs-training/demo-java/blob/main/docs/prerequisites.md#install-the-jdk)
-*  Install [Maven](https://github.com/saucelabs-training/demo-java/blob/main/docs/prerequisites.md#install-maven)
-
-### Import the Project
-
-1. Create a directory on your machine.
-
-2. Clone this repository into said directory.
-    ```
-    $ git clone https://github.com/saucelabs-training/demo-java.git
-    ```
-
-3. Import the project into your IntelliJ (or IDE of your choice) as a **Maven Project**.
-
-4. Click through the prompts, and confirm when it asks to **Import from Sources**
-
-5. Choose the **demo-java** directory as the **root** directory of the project.
-
-### Set Your Sauce Labs Credentials
-1. Copy your Sauce Labs **username** and **accessKey** in the [User Settings](https://app.saucelabs.com/user-settings) section of the [Sauce Labs Dashboard](https://app.saucelabs.com/dashboard/builds).
-2. Open a Terminal window (command prompt for Windows) and set your Sauce Labs Environment variables:   
-   **Mac OSX:**
-   ```
-   $ export SAUCE_USERNAME="your username"
-   $ export SAUCE_ACCESS_KEY="your accessKey"
-   $ export SCREENER_API_KEY="your screener key"
-   ```
-   **Windows:**
-   ```
-   > set SAUCE_USERNAME="username"
-   > set SAUCE_ACCESS_KEY="accessKey"
-   > set SCREENER_API_KEY="your screener key"
-   ```
-   > To set an environment variables permanently in Windows, you must append it to the `PATH` variable.
-   
-   > Go to **Control Panel > System > Windows version > Advanced System Settings > Environment Variables > System Variables > Edit > New**
-   
-   > Then set the "Name" and "Value" for each variable
-   
-3. Test the environment variables
-
-    **Mac OSX:**
-    ```
-    $ echo $SAUCE_USERNAME
-    $ echo $SAUCE_ACCESS_KEY
-    ```
-
-    ***WARNING FOR UNIX USERS!***
-    
-    *If you have problems setting your environment variables, run the following commands in your terminal:*
-
-    ```
-    $ launchctl setenv SAUCE_USERNAME $SAUCE_USERNAME
-    $ launchctl setenv SAUCE_ACCESS_KEY $SAUCE_ACCESS_KEY
-    ```
-
-    **Windows:**
-    ```
-    > echo %SAUCE_USERNAME%
-    > echo %SAUCE_ACCESS_KEY%
-    ```
-
-### Run a Maven Test
-
-1. Run the following command to update any package dependencies:
-    ```
-    $ mvn dependency:resolve
-    ```
-2. Then run the following command to compile your test code:
-    ```
-    $ mvn test-compile
-    ```
-3. Finally, run the following test to see if you've properly configured the test environment:
-    ```
-    $ mvn test -pl best-practice -Dtest=DesktopTests 
-
-    ```
-    
-   You can run different tests from different modules. Check out some examples by looking at the [CI YML files](./.github/workflows)
-
-## Contributing 
-
-This repository is maintained by the Solutions Architect team at Sauce Labs. **We welcome all ideas and contributions!**
-
-Guidance for contributing can be found [here](./CONTRIBUTING.md) 
 
 
-## Disclaimer
+## Sauce Labs Quick Start
 
-> The code in these scripts is provided on an "AS-IS" basis without warranty of any kind, either express or implied, including without limitation any implied warranties of condition, uninterrupted use, merchantability, fitness for a particular purpose, or non-infringement. These scripts are provided for educational and demonstration purposes only, and should not be used in production. Issues regarding these scripts should be submitted through GitHub. These scripts are maintained by the Technical Services team at Sauce Labs.
->
-> Some examples in this repository, such as `appium-example`, `parallel-testing`, and `headless`, may require a different account tier beyond free trial. Please contact the [Sauce Labs Sales Team](https://saucelabs.com/contact) for support and information.
+### `java` Edition
+
+<br>
+<img align="right" src="assets/logo_7.png">  
+
+
+
+| :rocket: [Sign Up for a _free_ trial at Sauce Labs][00] :bangbang:        |
+|:-------------------------------------------------------------------------|
+| :page_facing_up: [Source `java` Repo][31] and [original `README`][32]    |
+| :page_facing_up: [Dynamic Device Allocation][50]                         |
+| :page_facing_up: [Selenium Java Course][40]                              |
+| :page_facing_up: _`saucelabs`_ [Documentation Home][10]                  |
+| :page_facing_up: _`saucelabs`_ [Knowledge Base][11]                      |
+| :page_facing_up: _`saucelabs`_ [API Reference][12]                        |
+
+
+
+
+
+&nbsp;
+
+### _Quick Start_
+
+- _`maven`_ Required
+- Set Environment Variables
+  - _`SAUCE_USERNAME`_
+  - _`SAUCE_ACCESS_KEY`_
+- Clone Repo, Setup Environment, and Go!
+
+&nbsp;
+
+```sh
+# clone repo
+git clone https://github.com/kmissoumi/demo-java && cd demo-java 
+
+# resolve dependencies and test compile maven 
+mvn dependency:resolve && mvn test-compile
+
+# run test
+mvn test -pl appium-examples -Dtest=IOSNativeAppTest
+
+```
+
+</br>
+
+## _Device Allocation_
+
+### _[Dynamic Device Allocation][50]_  
+
+- [deviceName][51]
+- [platformVersion][52]
+- [platformName][53]
+  
+
+
+### Other Selection Criteria
+
+#### Device _Type_
+
+- [tabletOnly][54]
+- [phoneOnly][55]
+
+#### Device _Pool_
+
+- [privateDevicesOnly][56]
+- [publicDevicesOnly][57]
+
+</br>
+
+ > _Hint:_ Run multiple tests during the same device session with _[cacheId!][58]_
+
+</br>
+
+
+## Example Capabilities
+
+
+> _Hint_: For optimized request routing, _only_ set the _needed_ capabilities.  
+> (i.e. less is more, less is easier to trace)
+
+</br>
+
+```java
+// specific device by id
+// ** valid, yet not recommended, as this is unnecessarily specific **
+    capabilities.setCapability("deviceName", "iPhone_12_Pro_real_us");
+```
+
+> _Hint_: [Find Devices _theEasyWay!_][200]
+
+</br>
+
+```java
+// any iPhone from my private device pool
+    capabilities.setCapability("deviceName", "iPhone.*");
+    capabilities.setCapability("privateDevicesOnly", "true");
+```
+
+</br>
+
+```java
+// any iPhone from my private device pool with cacheId
+    capabilities.setCapability("deviceName", "iPhone.*");
+    capabilities.setCapability("privateDevicesOnly", "true");
+// set cacheId value to unique string per test suite
+// all test methods referencing this cacheId, will run on the same device
+    capabilities.setCapability("cacheId", "9776a1231a5f30a24");
+```
+
+</br>
+
+```java
+// any iOS 14.x phone from the public device pool
+    capabilities.setCapability("deviceName", ".*");
+    capabilities.setCapability("platformName", "iOS");
+    capabilities.setCapability("platformVersion", "14");
+    capabilities.setCapability("publicDevicesOnly", "true");
+    capabilities.setCapability("phoneOnly", "true");
+```
+
+
+</br>
+
+```java
+// any Android 11 phone or tablet
+    capabilities.setCapability("deviceName", ".*");
+    capabilities.setCapability("platformName", "Android");
+    capabilities.setCapability("platformVersion", "11");
+```
+
+</br>
+
+
+
+
+## Device Cleanup
+
+### Per Session _[Device Cleanup][70]_ Steps
+
+- accounts and data _cleared_
+- default browser history and user data _removed_
+- non-default browsers _uninstalled_
+- network settings _reset_
+- device settings _reset_
+- app _uninstalled_
+- cached data _deleted_
+- device _de-allocated_
+
+ </br>
+
+
+## References
+
+- [Sauce Labs Documentation Home][10]
+- [Sauce Labs Demo Repos and More!][30]
+  - [Source `java` Repo][31] and [original `README`][32]
+- [Support Central][01]
+- [Knowledge Base Articles][11]
+  - [Troubleshooting Tips for Device][61]
+  - [Session, Job, and Appium Ids Explained][62]
+- [Sauce School][02]
+  - [Selenium Java Course][40]
+- [Videos][05] & [Webinars][06]
+- [Data Sheets][03]
+  - [Device Cleanup Steps][70] and [Procedures][71]
+- [Papers & Reports][20]
+- [Case Studies][21]
+- [YouTube Channel][22]
+- [API Reference][12]
+- [CLi Reference][13]
+- [Glossary of Sauce Labs Terminology][15]
+- [Common Error Messages][16]
+- [System Status][17] & [Maintenance Windows][18]
+- [Selenium Platform Configurator][19]
+
+
+&nbsp;
+
+
+[00]: https://saucelabs.com/sign-up
+[01]: https://support.saucelabs.com/hc/en-us
+[02]: https://training.saucelabs.com
+[03]: https://saucelabs.com/resources/data-sheets
+
+[05]: https://saucelabs.com/resources/videos
+[06]: https://saucelabs.com/resources/webinars
+
+[10]: https://docs.saucelabs.com
+[11]: https://support.saucelabs.com/hc/en-us#knowledge-base
+[12]: https://docs.saucelabs.com/dev/api/#accessing-the-apis
+[13]: https://docs.saucelabs.com/dev/cli
+
+[15]: https://docs.saucelabs.com/dev/glossary
+[16]: https://docs.saucelabs.com/dev/error-messages
+[17]: https://status.saucelabs.com
+[18]: https://docs.saucelabs.com/dev/data-center-maint
+[19]: https://saucelabs.com/platform/platform-configurator#
+
+[20]: https://saucelabs.com/resources/white-papers
+[21]: https://saucelabs.com/resources/case-studies
+[22]: https://www.youtube.com/user/saucelabs/videos
+
+[30]: https://github.com/saucelabs-training
+[31]: https://github.com/saucelabs-training/demo-java
+[32]: //README2.md
+
+[40]: https://training.saucelabs.com/SeleniumJava
+[41]: https://training.saucelabs.com/seleniumpython
+
+[50]: https://docs.saucelabs.com/mobile-apps/supported-devices/#dynamic-device-allocation
+[51]: https://docs.saucelabs.com/dev/test-configuration-options/#devicename
+[52]: https://docs.saucelabs.com/dev/test-configuration-options/#platformversion
+[53]: https://docs.saucelabs.com/mobile-apps/automated-testing/appium/real-devices/#specifying-the-platformname
+[54]: https://docs.saucelabs.com/dev/test-configuration-options/#tabletonly
+[55]: https://docs.saucelabs.com/dev/test-configuration-options/#phoneonly
+[56]: https://docs.saucelabs.com/dev/test-configuration-options/#privatedevicesonly
+[57]: https://docs.saucelabs.com/dev/test-configuration-options/#publicdevicesonly
+[58]: https://docs.saucelabs.com/dev/test-configuration-options/#cacheid
+
+[61]: https://support.saucelabs.com/hc/en-us/sections/115000518514-RDC-Mobile-Application-Testing-Tips-and-Troubleshooting
+[62]: https://support.saucelabs.com/hc/en-us/articles/360062316954-Session-ID-Job-ID-and-Appium-Session-ID-What-is-the-difference-
+
+[70]: https://docs.saucelabs.com/mobile-apps/supported-devices/#real-device-cleaning
+[71]: https://saucelabs.com/assets/19LV8PISelZ5na3uwghC1x/5e2846c6c4c4aed55e97db30a301f2b6/DS__Device_Cleanup_Procedure.pdf
+
+[80]: https://docs.saucelabs.com/testrunner-toolkit/configuration/common-syntax/#mode
+    "Test Runner Toolkit Common Syntax"
+[81]: https://docs.saucelabs.com/testrunner-toolkit/ide-integrations/vscode
+    "Test Runner Toolkit IDE Integration w/ Visual Studio Code"
+[82]: https://docs.saucelabs.com/testrunner-toolkit
+    "_saucectl_ Docs"
+[83]: https://docs.saucelabs.com/testrunner-toolkit/saucectl
+    "_saucectl_ CLI Reference"
+[84]: https://docs.saucelabs.com/testrunner-toolkit/configuration/espresso
+    "_saucectl_ YML Reference"
+
+[200]: https://gist.github.com/kmissoumi/b54d5abc87658e8e30314175be2c61a5
+    "Find Device Id, Details, and Availability _theEasyWay!_"
+
+[500]: https://docs.saucelabs.com/visual/e2e-testing/setup
+    "Getting Started with Sauce Visual"
+[501]: https://github.com/saucelabs-training/demo-java/blob/dff5fd61b8e152efe59e4a8c9e75c644de4e51e0/selenium-junit4-examples/src/test/java/com/saucedemo/SimpleVisualE2ETest.java
+ "Basic Visual E2E Test"
+[505]: https://docs.saucelabs.com/visual/acct-team-mgmt/
+    "Add Teams and Users"
+
