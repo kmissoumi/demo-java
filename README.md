@@ -42,7 +42,7 @@ git clone https://github.com/kmissoumi/demo-java && cd demo-java
 mvn dependency:resolve && mvn test-compile
 
 # run test
-mvn test -pl appium-examples -Dtest=IOSNativeAppTest
+mvn test -pl appium-examples -Dtest=AndroidNativeAppTest,IOSNativeAppTest
 
 ```
 
@@ -104,8 +104,8 @@ mvn test -pl appium-examples -Dtest=IOSNativeAppTest
 </br>
 
 ```java
-// any iPhone from my private device pool with cacheId
-    capabilities.setCapability("deviceName", "iPhone.*");
+// any iPhone 12 (regular, mini, Pro, Pro Max) from my private device pool
+    capabilities.setCapability("deviceName", "iPhone 12.*");
     capabilities.setCapability("privateDevicesOnly", "true");
 // set cacheId value to unique string per test suite
 // all test methods referencing this cacheId, will run on the same device

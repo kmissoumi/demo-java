@@ -32,23 +32,35 @@ public class IOSNativeAppTest {
     public AppiumDriver<MobileElement> getDriver() {
         return driver;
     }
+    
 
     @Before
     public void setUp() throws MalformedURLException {
         MutableCapabilities capabilities = new MutableCapabilities();
-        capabilities.setCapability("idleTimeout", "90");
-        capabilities.setCapability("noReset", "true");
-        capabilities.setCapability("newCommandTimeout", "90");
-        capabilities.setCapability("language", "en");
-        capabilities.setCapability("deviceName", "iPhone.*");
-        capabilities.setCapability("name", name.getMethodName());
-        capabilities.setCapability("app",
-                "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+        MutableCapabilities sauceOptions = new MutableCapabilities();
+        capabilities.setCapability("platformName", "iOS");
+        capabilities.setCapability("language", "en"); 
+        capabilities.setCapability("appium:newCommandTimeout", "90");
+        capabilities.setCapability("appium:deviceName", "iPhone 12.*");
+        capabilities.setCapability("appium:automationName", "XCUITest");
+        capabilities.setCapability("appium:app",
+                "https://github.com" +
+                "/saucelabs/sample-app-mobile" +
+                "/releases/download" + 
+                "/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+        sauceOptions.setCapability("idleTimeout", "90");
+        sauceOptions.setCapability("name", name.getMethodName());
+        sauceOptions.setCapability("noReset", "true");
+        //sauceOptions.setCapability("username", System.getenv("SAUCE_USERNAME"));
+        //sauceOptions.setCapability("accesskey", System.getenv("SAUCE_ACCESS_KEY"));
+        capabilities.setCapability("sauce:options", sauceOptions);
+        
+       // System.out.println(capabilities.toJson());
 
         driver = new IOSDriver(
-                new URL("https://" + System.getenv("SAUCE_USERNAME") + ":" +
-                        System.getenv("SAUCE_ACCESS_KEY") +
-                        "@ondemand.us-west-1.saucelabs.com/wd/hub"),
+                    new URL("https://" +  System.getenv("SAUCE_USERNAME") + ":" +
+                    System.getenv("SAUCE_ACCESS_KEY") + "@" +
+                    "ondemand.us-west-1.saucelabs.com/wd/hub"),
                 capabilities);
         //Setting the driver so that we can report results
         resultReportingTestWatcher.setDriver(driver);
