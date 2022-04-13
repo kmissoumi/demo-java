@@ -86,6 +86,45 @@ mvn test -pl appium-examples -Dtest=AndroidNativeAppTest,IOSNativeAppTest
 </br>
 
 ```java
+MutableCapabilities capabilities = new MutableCapabilities();
+    capabilities.setCapability("platformName", "iOS");
+    capabilities.setCapability("appium:newCommandTimeout", "90");
+    capabilities.setCapability("appium:deviceName", "iPhone 12.*");
+    capabilities.setCapability("appium:automationName", "XCUITest");
+    capabilities.setCapability("appium:app",
+        "https://github.com" +
+        "/saucelabs/sample-app-mobile" +
+        "/releases/download" + 
+        "/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+
+MutableCapabilities sauceOptions = new MutableCapabilities();
+    sauceOptions.setCapability("idleTimeout", "90");
+    sauceOptions.setCapability("name", name.getMethodName());
+    sauceOptions.setCapability("noReset", "true");
+    capabilities.setCapability("sauce:options", sauceOptions);
+```
+
+```java
+MutableCapabilities capabilities = new MutableCapabilities();
+    capabilities.setCapability("platformName", "Android");
+    capabilities.setCapability("appium:newCommandTimeout", "90");
+    capabilities.setCapability("appium:deviceName", "Google Pixel.*");
+    capabilities.setCapability("appium:automationName", "UiAutomator2");
+    capabilities.setCapability("appium:app", "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+
+MutableCapabilities sauceOptions = new MutableCapabilities();
+    sauceOptions.setCapability("idleTimeout", "90");
+    sauceOptions.setCapability("name", "Android Native App W3C);
+    sauceOptions.setCapability("noReset", "true");
+    capabilities.setCapability("sauce:options", sauceOptions);
+
+    driver = new AndroidDriver(new URL("https://" + System.getenv("SAUCE_USERNAME") + ":" + System.getenv("SAUCE_ACCESS_KEY") + "@ondemand.us-west-1.saucelabs.com/wd/hub"),
+    capabilities);
+
+```
+
+
+```java
 // specific device by id
 // ** valid, yet not recommended, as this is unnecessarily specific **
     capabilities.setCapability("deviceName", "iPhone_12_Pro_real_us");
